@@ -1,31 +1,31 @@
-import DamascusImage from './assets/Damascus.jpg';
-import HomsImage from './assets/Homs.jpg';
-import LatakiaImage from './assets/Latakia.jpg';
-import AleppoImage from './assets/Aleppo.jpg';
+import damascusImg from "./assets/Damascus.jpg";
+import aleppoImg from "./assets/Aleppo.jpg";
+import latakiaImg from "./assets/Latakia.jpg";
+import homsImg from "./assets/Homs.jpg";
 
-export const discoverCards = [
+export const discoverData = [
     {
         id: 1,
-        title: 'حمص',
-        subtitle: 'قلب سوريا',
-        image: HomsImage,
+        title: "دمشق",
+        subtitle: "مدينة الياسمين",
+        image: damascusImg,
     },
     {
         id: 2,
-        title: 'اللاذقية',
-        subtitle: 'نسمة من البحر',
-        image: LatakiaImage,
+        title: "حلب",
+        subtitle: "عاصمة الشهباء",
+        image: aleppoImg,
     },
     {
         id: 3,
-        title: 'حلب',
-        subtitle: 'عاصمة الشهباء',
-        image:AleppoImage,
+        title: "اللاذقية",
+        subtitle: "نسمة من البحر",
+        image: latakiaImg,
     },
     {
         id: 4,
-        title: 'دمشق',
-        subtitle: 'مدينة الياسمين',
-        image: DamascusImage,
+        title: "حمص",
+        subtitle: "قلب سوريا",
+        image: homsImg,
     },
 ];
