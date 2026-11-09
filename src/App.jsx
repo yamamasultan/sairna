@@ -1,13 +1,13 @@
-import HomePage from './features/homepage/HomePage';
-import Header from './components/header/Header';
-import Footer from './components/footer/Footer'; 
+// import HomePage from './features/homepage/HomePage';
+// import Header from './components/header/Header';
+import Footer from './components/footer/footer'; 
 
 function App() {
   return (
     <div className="bg-white text-gray-900">
-      <Header />
+      {/* <Header /> */}
       
-      <HomePage />
+      {/* <HomePage /> */}
       
       <Footer />
     </div>
