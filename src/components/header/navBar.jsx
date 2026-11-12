@@ -7,25 +7,26 @@ function NavBar({ activeItem, setActiveItem }) {
                 {navItems.map((item) => {
                     const isActive = activeItem === item;
                     return (
-                        <li key={item}>
+                        <li key={item} className="relative flex flex-col items-center group">
                             <button
                                 type="button"
                                 onClick={() => setActiveItem(item)}
-                                className={`group relative cursor-pointer whitespace-nowrap py-8 text-xs font-extrabold transition-colors ${
+                                className={`cursor-pointer whitespace-nowrap py-8 text-xs font-extrabold transition-colors ${
                                     isActive
                                         ? "text-[var(--text)]"
                                         : "text-[var(--muted)] hover:text-[var(--text)]"
                                 }`}
                             >
                                 {item}
-                                <span
-                                    className={`absolute bottom-[17px] left-1/2 h-[3px] -translate-x-1/2 rounded-[5px] bg-[var(--primary)] transition-all duration-200 ${
-                                        isActive
-                                            ? "w-[23px] opacity-100"
-                                            : "w-0 opacity-0 group-hover:w-[23px] group-hover:opacity-100"
-                                    }`}
-                                />
                             </button>
+                            {/* الخط الأخضر الذي يظهر عند المرور أو الثبات عند الاختيار */}
+                            <span
+                                className={`absolute bottom-[17px] h-[3px] rounded-[5px] bg-[var(--primary)] transition-all duration-200 ${
+                                    isActive
+                                        ? "w-[23px] opacity-100"
+                                        : "w-0 opacity-0 group-hover:w-[23px] group-hover:opacity-100"
+                                }`}
+                            />
                         </li>
                     );
                 })}
