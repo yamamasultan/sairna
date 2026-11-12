@@ -1,4 +1,4 @@
-// import HomePage from './features/homepage/HomePage';
+import HomePage from './features/homepage/HomePage';
 import Header from './components/header/header';
 // import Footer from './components/footer/Footer'; 
 
@@ -7,9 +7,9 @@ function App() {
     <div className="bg-white text-gray-900">
       <Header />
       
-      {/* <HomePage />
+      <HomePage />
       
-      <Footer /> */}
+      {/* <Footer /> */}
     </div>
   );
 }
