@@ -1,3 +1,4 @@
+import StateCard from './components/statecard/statecard';
 import Hero from './components/hero/hero';
 import StateCard from './components/statecard/statecard';
 import Discover from './components/Discover/discover';

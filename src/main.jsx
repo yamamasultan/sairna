@@ -1,9 +1,8 @@
-
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'; // 1. استيراد المكتبة
-import './index.css';
-import App from './App.jsx';
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'; 
+import './index.css'
+import App from './App.jsx'
 
 // 2. إنشاء نسخة من QueryClient
 const queryClient = new QueryClient({
@@ -16,7 +15,6 @@ const queryClient = new QueryClient({
 });
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    {/* 3. تغليف التطبيق بالـ Provider وتمرير الـ client */}
     <QueryClientProvider client={queryClient}>
       <App />
     </QueryClientProvider>
