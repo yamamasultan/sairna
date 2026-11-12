@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-color-scheme: light;
+    color-scheme: light;
     --bg: #f8fafb;
     --surface: #fff;
     --surface-alt: #f2f7f8;
@@ -15,11 +15,22 @@ color-scheme: light;
     --dark: #103a4e;
     --dark-deep: #0a2c3e;
     --soft-teal: #e6f8f3;
-    --shadow: 0 15px 55px rgba(19, 54, 72, .065);
-    --shadow-md: 0 22px 60px rgba(19, 54, 72, .11);
     --radius: 22px;
     --container: 1216px;
     --font: Cairo, "Segoe UI", Tahoma, sans-serif;
+}
+
+.dark {
+    color-scheme: dark;
+    --bg: #0b1c29;
+    --surface: #112b3b;
+    --surface-alt: #173748;
+    --text: #eef8fa;
+    --muted: #9eb3be;
+    --border: #254252;
+    --dark: #0e2634;
+    --dark-deep: #091c27;
+    --soft-teal: #174b49;
 }
 
 .container {
@@ -29,7 +40,6 @@ color-scheme: light;
     padding-inline: 16px;        
 }
 
-/* Media query for larger screens (e.g., tablets and desktops) */
 @media (min-width: 768px) {
     .container {
         padding-inline: 34px;
