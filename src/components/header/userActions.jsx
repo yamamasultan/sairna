@@ -1,42 +1,33 @@
-import { Moon , Sun, ArrowLeft}from"lucide-react"
+import { Moon, Sun, ArrowLeft } from "lucide-react";
 
-
-function userActions({isDarkMode,toggleDarkMode}) {
+function UserActions({ isDarkMode, toggleDarkMode }) {
     return (
-        <div className="flex shrink-0 items-center gap-4" dir="rtl gap-10">
-        <button
-            type="button"
-            onClick={toggleDarkMode}
-            aria-label="Toggle dark mode"
-            className="flex h-12 w-12 items-center justify-center rounded-2xl border border-gray-200 text-[#0C3042] dark:border-gray-700 dark:text-white gap-20"
-        >
-            { isDarkMode ? (
-            <Sun size={22}/>
-            ) : (
-            <Moon size={22}/>
-
-            )
-            }
-        </button>
-
-        <button type="button"
-                className="font-bold text-[#0C3042] dark:text-white"
-                > 
-                    دخول
-        </button>
-
-        <button  type="button"
-            className="flex items-center gap-3 rounded-xl bg-[#0C3042] px-5 py-3 font-bold text-white
-            hover:bg-[#16465B]hover:-translate-y-1 transition-transform duration-200
-            hover:shadow-lg hover:-translate-y-1 hover-shadow lg cursor-pointer"
-            
+        <div className="flex shrink-0 items-center gap-3" dir="rtl">
+            <button
+                type="button"
+                onClick={toggleDarkMode}
+                aria-label="تبديل المظهر"
+                title="تبديل المظهر"
+                className="inline-grid h-10 w-10 cursor-pointer place-items-center rounded-[12px] border border-[var(--border)] bg-[var(--surface)] text-[var(--text)] transition-colors hover:border-[var(--primary)] hover:bg-[var(--soft-teal)] hover:text-[var(--primary)]"
             >
-            انشاء حساب
-            <ArrowLeft size={18}/>
+                {isDarkMode ? <Sun size={19} /> : <Moon size={19} />}
             </button>
-        
+
+            <a
+                href="#login"
+                className="hidden whitespace-nowrap text-xs font-extrabold text-[var(--text)] hover:text-[var(--primary)] sm:inline-block"
+            >
+                دخول
+            </a>
+
+            <a
+                href="#register"
+                className="inline-flex min-h-[40px] cursor-pointer items-center justify-center gap-2.5 whitespace-nowrap rounded-[12px] bg-[var(--dark)] px-4 py-2 text-xs font-extrabold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-[var(--primary-deep)]"
+            >
+                إنشاء حساب
+                <ArrowLeft size={16} />
+            </a>
         </div>
     );
 }
-
-export default userActions;
+export default UserActions;
