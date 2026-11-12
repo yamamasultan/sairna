@@ -14,11 +14,14 @@ const Footer = () => {
     };
 
     return (
-        <footer className="w-full bg-[#072227] text-white pt-16 pb-8 px-4 md:px-12" dir="rtl">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+        <footer className="w-full bg-[#072227] text-white pt-12 pb-8 px-6 sm:px-10 md:px-16" dir="rtl">
+        {/* 
+            حاوية رئيسية تأخذ عرض موحد مع تباعد متساوية من الطرفين (mx-auto)
+        */}
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 pb-10 border-b border-white/10">
             
             {/* العمود الأول: الشعار، الوصف، وأيقونات التواصل */}
-            <div className="flex flex-col items-start text-right gap-4 md:col-span-1">
+            <div className="flex flex-col items-start text-right gap-4 sm:col-span-2 lg:col-span-1">
             
             {/* الشعار */}
             <div className="flex items-center gap-3">
@@ -35,25 +38,25 @@ const Footer = () => {
                 </div>
             </div>
 
-            <p className="text-gray-300 text-xs md:text-sm leading-relaxed text-right">
-                طريقة أجمل وأسهل للسفر بين المحافظات السورية. ابحث، اختر، واحتج بكل راحة.
+            <p className="text-gray-300 text-sm leading-relaxed text-right">
+                طريقة أجمل وأسهل للسفر بين المحافظات السورية. ابحث، اختر، واحجز بكل راحة.
             </p>
 
             {/* أيقونات التواصل الاجتماعي */}
-            <div className="flex items-center gap-3 mt-2">
-                <a href="#phone" className="w-10 h-10 rounded-xl border border-white/20 flex items-center justify-center hover:bg-[#0D9488] hover:border-transparent transition-all duration-300">
+            <div className="flex items-center gap-3 mt-1">
+                <a href="#phone" className="w-10 h-10 rounded-xl border border-white/20 flex items-center justify-center hover:bg-[#0D9488] active:bg-[#0D9488] hover:border-transparent transition-all duration-300">
                 <Phone className="w-4 h-4 text-white" />
                 </a>
-                <a href="#email" className="w-10 h-10 rounded-xl border border-white/20 flex items-center justify-center hover:bg-[#0D9488] hover:border-transparent transition-all duration-300">
+                <a href="#email" className="w-10 h-10 rounded-xl border border-white/20 flex items-center justify-center hover:bg-[#0D9488] active:bg-[#0D9488] hover:border-transparent transition-all duration-300">
                 <Mail className="w-4 h-4 text-white" />
                 </a>
-                <a href="#globe" className="w-10 h-10 rounded-xl border border-white/20 flex items-center justify-center hover:bg-[#0D9488] hover:border-transparent transition-all duration-300">
+                <a href="#globe" className="w-10 h-10 rounded-xl border border-white/20 flex items-center justify-center hover:bg-[#0D9488] active:bg-[#0D9488] hover:border-transparent transition-all duration-300">
                 <Globe className="w-4 h-4 text-white" />
                 </a>
             </div>
             </div>
 
-            {/* أعمدة الروابط */}
+            {/* أعمدة الروابط (استكشف، حسابك، ونحن هون لمساعدتك) */}
             {Object.entries(footerNavigation).map(([key, section], index) => (
             <div key={index} className="flex flex-col gap-4 text-right">
                 <h3 className="text-lg font-bold text-white tracking-wide">
@@ -64,26 +67,26 @@ const Footer = () => {
                     <li key={linkIndex}>
                     <Link
                         to={link.path}
-                        className="text-sm text-gray-300 hover:text-[#0D9488] transition-colors duration-200 block"
+                        className="text-sm text-gray-300 hover:text-[#0D9488] active:text-[#0D9488] transition-colors duration-200 block py-0.5"
                     >
                         {link.name}
                     </Link>
                     </li>
                 ))}
 
-                {/* البريد الإلكتروني التفاعلي بأسلوب الصورة المرفقة */}
+                {/* البريد الإلكتروني التفاعلي تحت قسم المساعدة */}
                 {key === "support" && (
                     <li className="pt-2 relative">
                     <button
                         onClick={handleCopyEmail}
-                        className="group flex items-center gap-2.5 text-sm text-gray-300 hover:text-[#0D9488] active:scale-95 transition-all duration-200 cursor-pointer"
+                        className="group flex items-center gap-2.5 text-sm text-gray-300 hover:text-[#0D9488] active:text-[#0D9488] active:scale-95 transition-all duration-200 cursor-pointer"
                         title="انقر لنسخ البريد"
                     >
                         <Mail className="w-4 h-4 text-gray-300 group-hover:text-[#0D9488] transition-colors duration-200 shrink-0" />
-                        <span dir="ltr" className="font-mono text-xs md:text-sm">hello@sairna.example</span>
+                        <span dir="ltr" className="font-mono text-sm">hello@sairna.example</span>
                     </button>
 
-                    {/* إشعار تم النسخ عند النقر */}
+                    {/* إشعار تم النسخ */}
                     {copied && (
                         <span className="absolute -bottom-6 right-0 bg-[#0D9488] text-white text-[10px] px-2 py-0.5 rounded shadow-lg animate-fade-in">
                         تم نسخ البريد!
@@ -96,13 +99,14 @@ const Footer = () => {
             ))}
         </div>
 
-        {/* حقوق النشر */}
-        <div className="max-w-7xl mx-auto pt-6 flex flex-col md:flex-row items-center justify-between text-gray-400 text-[11px] gap-2">
-            <p>جميع الحقوق محفوظة © 2026 سيرنا.</p>
-            
+        {/* قسم حقوق النشر ومصادر الصور مع محاذاة متساوية الأطراف */}
+        <div className="max-w-7xl mx-auto pt-6 flex flex-col gap-4 text-gray-400 text-[11px] text-right">
+            <p>© 2026 سيرنا. جميع الحقوق محفوظة.</p>
         </div>
         </footer>
     );
 };
+
+Footer.displayName = "Footer";
 
 export default Footer;
