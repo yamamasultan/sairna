@@ -1,12 +1,14 @@
 import HomePage from './features/homepage/HomePage';
-// import Header from './components/header/Header';
-// import Footer from './components/footer/Footer'; 
+import Header from './components/header/Header';
+// import Footer from './components/footer/Footer';
 
 function App() {
-  return (
-    <div className="bg-white text-gray-900">
-      {/* <Header /> */}
-      
+
+    return (
+
+
+      <Header /> 
+
       <HomePage />
       
       {/* <Footer /> */}
