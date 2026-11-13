@@ -1,6 +1,9 @@
 // import HomePage from './features/homepage/HomePage';
 // import Header from './components/header/Header';
 import Footer from './components/footer/footer'; 
+import HomePage from './features/homepage/HomePage';
+import Header from './components/header/Header';
+// import Footer from './components/footer/Footer';
 
 function App() {
   return (
@@ -8,8 +11,15 @@ function App() {
       {/* <Header /> */}
       
       {/* <HomePage /> */}
+
+    return (
+
+
+      <Header /> 
+
+      <HomePage />
       
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
