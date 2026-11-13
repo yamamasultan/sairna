@@ -25,23 +25,23 @@ const StepsSection = () => {
                 return (
                 <div
                     key={step.number}
-                    className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-3 cursor-pointer flex flex-col justify-between h-64"
+                    className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-3 cursor-pointer flex flex-col justify-between h-64
+                    max-md:h-auto max-md:py-5 max-md:px-4 max-md:flex-row max-md:items-center max-md:justify-between max-md:gap-4 max-md:rounded-2xl"
                 >
                     
-                    <div className="flex items-start justify-between w-full">
+                    <div className="flex items-start justify-between w-full max-md:order-2 max-md:w-auto max-md:shrink-0">
                     <div
                         className={`w-12 h-12 rounded-2xl ${step.iconBg} ${step.iconColor} flex items-center justify-center shrink-0`}
                     >
                         <IconComponent className="w-6 h-10" />
                     </div>
-                    <span className="text-4xl md:text-5xl font-black text-gray-200 tracking-wider">
+                    <span className="text-4xl md:text-5xl font-black text-gray-200 tracking-wider max-md:hidden">
                         {step.number}
                     </span>
-                    
                     </div>
 
                     {/* Bottom Row: Title & Description */}
-                    <div className="flex flex-col gap-2">
+                    <div className="flex flex-col gap-2 max-md:order-1 max-md:flex-1 max-md:text-right">
                     <h3 className="text-xl font-bold text-[#0F3A3E]">
                         {step.title}
                     </h3>

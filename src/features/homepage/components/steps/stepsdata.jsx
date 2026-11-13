@@ -11,7 +11,7 @@ export const stepsData = [
     },
     {
         number: "02",
-        title: "لافي رحلتك",
+        title: "لاقي رحلتك",
         description: "قارن الشركات والمواعيد والأسعار واختر الأفضل.",
         icon: Bus,
         iconBg: "bg-[#FFF4E5]",
