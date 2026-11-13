@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useCities, useTrips } from "../../hooks"; // استدعاء الهوكس
+import { useCities, useTrips } from "../../hooks";
 import BookingField from "./bookingField";
 
 export default function BookingSearch() {
@@ -10,10 +10,8 @@ export default function BookingSearch() {
     const [isPassengerOpen, setIsPassengerOpen] = useState(false);
     const [searchParams, setSearchParams] = useState(null);
 
-    // 1. جلب المدن
     const { data: citiesData, isLoading } = useCities();
 
-    // تعيين المدن الافتراضية أول ما توصل
     if (citiesData && citiesData.length > 1 && !fromCity && !toCity) {
         const aleppo = citiesData.find(c => c.name.includes("حلب")) || citiesData[1];
         const damascus = citiesData.find(c => c.name.includes("دمشق")) || citiesData[0];
@@ -21,8 +19,7 @@ export default function BookingSearch() {
         setToCity(damascus);
     }
 
-    // 2. البحث عن الرحلات
-    useTrips(searchParams); // بنستدعي الهوك بس عشان يشتغل بالخلفية
+    useTrips(searchParams);
 
     const swapCities = () => {
         setFromCity(toCity);
@@ -40,7 +37,7 @@ export default function BookingSearch() {
     if (isLoading) return <div className="p-6 text-center text-[var(--text)]">جاري التحميل...</div>;
 
     return (
-        <div className="w-full rounded-[32px] border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm relative z-10">
+        <div className="relative z-50 w-full rounded-[32px] border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm">
             {/* الهيدر */}
             <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
@@ -50,102 +47,122 @@ export default function BookingSearch() {
                 </div>
                 <div className="flex items-center gap-1.5 text-xs font-bold text-[var(--primary)]">
                     <span>الحجز بـ 3 خطوات</span>
-                    <span>✦</span>
-                </div>
+                    <span>✦</span> </div>
             </div>
 
             {/* الحقول */}
-            <div className="flex flex-col lg:flex-row items-end gap-3 relative z-20">
+            <div className="flex flex-col lg:flex-row lg:items-end gap-3 relative z-20">
                 
-                <BookingField
-                    label="من وين؟"
-                    value={getCityName(fromCity)}
-                    options={cityNames}
-                    onChange={(selectedName) => {
-                        const selectedCity = citiesData.find(c => c.name === selectedName);
-                        setFromCity(selectedCity);
-                    }}
-                />
-
-                <button
-                    type="button"
-                    onClick={swapCities}
-                    className="mb-1 flex h-11 w-12 shrink-0 items-center justify-center rounded-2xl bg-[var(--soft-teal)] text-lg font-bold text-[var(--primary)] transition duration-300 hover:rotate-180"
-                >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
-                </button>
-
-                <BookingField
-                    label="لوين؟"
-                    value={getCityName(toCity)}
-                    options={cityNames}
-                    onChange={(selectedName) => {
-                        const selectedCity = citiesData.find(c => c.name === selectedName);
-                        setToCity(selectedCity);
-                    }}
-                />
-
-                {/* التاريخ */}
-                <div className="w-full lg:w-48 shrink-0">
-                    <label className="mb-2 block text-xs font-bold text-[var(--muted)] text-right">تاريخ الرحلة</label>
-                    <div className="relative flex h-[46px] items-center">
-                        <input
-                            type="date"
-                            value={date}
-                            onChange={(e) => setDate(e.target.value)}
-                            className="h-full w-full cursor-pointer rounded-2xl border border-[var(--border)] bg-[var(--surface)] pl-4 pr-10 text-sm font-bold text-[var(--text)] outline-none transition hover:border-gray-300 focus:border-[var(--primary)] text-left"
-                            dir="ltr"
+                {/* تم جمع "من وين" و زر التبديل و "لوين" بداخل حاوية أفقية حتى على الموبايل */}
+                <div className="flex flex-row items-end gap-2 w-full lg:contents">
+                    
+                    {/* حقل من وين */}
+                    <div className="flex-1 min-w-0 ">
+                        <BookingField
+                            label="من وين؟"
+                            value={getCityName(fromCity)}
+                            options={cityNames}
+                            onChange={(selectedName) => {
+                                const selectedCity = citiesData.find(c => c.name === selectedName);
+                                setFromCity(selectedCity);
+                            }}
                         />
-                        <svg 
-                            className="pointer-events-none absolute right-3.5 inset-y-0 my-auto h-5 w-5 text-[var(--primary)]" 
-                            fill="none" 
-                            stroke="currentColor" 
-                            viewBox="0 0 24 24"
-                        >
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                        </svg>
                     </div>
+
+                    {/* زر التبديل بين المدن */}
+                    <div className="flex items-center mb-1 shrink-0">
+                        <button
+                            type="button"
+                            onClick={swapCities}
+                            className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-2xl bg-[var(--soft-teal)] text-[var(--primary)] transition duration-300 hover:rotate-180"
+                        >
+                            <svg className="w-4 h-4 sm:w-5 sm:h-5 rotate-90 lg:rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7h12m0 0l-4-4m4 4l-4 4l0 6H4m0 0l4 4m-4-4l4-4"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    {/* حقل لوين */}
+                    <div className="flex-1 min-w-0">
+                        <BookingField
+                            label="لوين؟"
+                            value={getCityName(toCity)}
+                            options={cityNames}
+                            onChange={(selectedName) => {
+                                const selectedCity = citiesData.find(c => c.name === selectedName);
+                                setToCity(selectedCity);
+                            }}
+                        />
+                    </div>
+
                 </div>
 
-                {/* المسافرين */}
-                <div className="relative w-full lg:w-40 shrink-0 z-30">
-                    <label className="mb-2 block text-xs font-bold text-[var(--muted)] text-right">المسافرين</label>
-                    <button
-                        type="button"
-                        onClick={() => setIsPassengerOpen(!isPassengerOpen)}
-                        className={`flex w-full items-center justify-between rounded-2xl border bg-[var(--surface)] px-4 py-3 transition outline-none ${
-                            isPassengerOpen ? "border-[var(--primary)]" : "border-[var(--border)] hover:border-gray-300"
-                        }`}
-                    >
-                        <span className="flex items-center gap-2 text-sm font-bold text-[var(--text)]">
-                            <svg className="w-5 h-5 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                            {passengers} مسافر
-                        </span>
-                    </button>
+                {/* صف المسافرين والتاريخ */}
+                <div className="grid grid-cols-2 gap-3 w-full lg:contents">
+                    
+                    {/* تاريخ الرحلة (اليمين - تم نقله ليكون الأول) */}
+                    <div className="w-full lg:w-48 shrink-0">
+                        <label className="mb-2 block text-xs font-bold text-[var(--muted)] text-right">تاريخ الرحلة</label>
+                        <div className="relative flex h-[46px] items-center">
+                            <input
+                                type="date"
+                                value={date}onChange={(e) => setDate(e.target.value)}
+                                className="h-full w-full cursor-pointer rounded-2xl border border-[var(--border)] bg-[var(--surface)] pl-2 pr-7 sm:pl-4 sm:pr-10 text-[11px] sm:text-sm font-bold text-[var(--text)] outline-none transition hover:border-gray-300 focus:border-[var(--primary)] text-left"
+                                dir="ltr"
+                            />
+                            <svg 
+                                className="pointer-events-none absolute right-2 sm:right-3.5 inset-y-0 my-auto h-4 w-4 sm:h-5 sm:w-5 text-[var(--primary)]" 
+                                fill="none" 
+                                stroke="currentColor" 
+                                viewBox="0 0 24 24"
+                            >
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                    </div>
 
-                    {isPassengerOpen && (
-                        <>
-                            <div className="fixed inset-0 z-40" onClick={() => setIsPassengerOpen(false)}></div>
-                            {/* ضفنا z-50 هون كمان */}
-                            <div className="absolute top-full right-0 z-50 mt-2 w-full overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-xl">
-                                {[1, 2, 3, 4].map((num) => (
-                                    <button
-                                        key={num}
-                                        type="button"
-                                        onClick={() => {
-                                            setPassengers(num);
-                                            setIsPassengerOpen(false);
-                                        }}
-                                        className={`block w-full px-4 py-3 text-right text-sm font-bold transition hover:bg-[var(--bg)] ${
-                                            passengers === num ? "bg-[var(--soft-teal)] text-[var(--primary)]" : "text-[var(--text)]"
-                                        }`}
-                                    >
-                                        {num} مسافر
-                                    </button>
-                                ))}
-                            </div>
-                        </>
-                    )}
+                    {/* المسافرين (اليسار - تم نقله ليكون الثاني) مع رفع z-index */}
+                    <div className="relative w-full lg:w-40 shrink-0 z-40">
+                        <label className="mb-2 block text-xs font-bold text-[var(--muted)] text-right">المسافرين</label>
+                        <button
+                            type="button"
+                            onClick={() => setIsPassengerOpen(!isPassengerOpen)}
+                            className={`flex w-full items-center justify-between rounded-2xl border bg-[var(--surface)] px-3 sm:px-4 py-3 transition outline-none h-[46px] ${
+                                isPassengerOpen ? "border-[var(--primary)]" : "border-[var(--border)] hover:border-gray-300"
+                            }`}
+                        >
+                            <span className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-bold text-[var(--text)] truncate">
+                                <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--primary)] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                                </svg>
+                                {passengers} مسافر
+                            </span>
+                        </button>
+
+                        {isPassengerOpen && (
+                            <>
+                                <div className="fixed inset-0 z-40" onClick={() => setIsPassengerOpen(false)}></div>
+                                <div className="absolute top-full right-0 z-50 mt-2 w-full overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-xl">
+                                    {[1, 2, 3, 4].map((num) => (
+                                        <button
+                                            key={num}
+                                            type="button"
+                                            onClick={() => {
+                                                setPassengers(num);
+                                                setIsPassengerOpen(false);
+                                            }}
+                                            className={`block w-full px-4 py-3 text-right text-sm font-bold transition hover:bg-[var(--bg)] ${
+                                                passengers === num ? "bg-[var(--soft-teal)] text-[var(--primary)]" : "text-[var(--text)]"
+                                            }`}
+                                        >
+                                            {num} مسافر
+                                        </button>
+                                    ))}
+                                </div>
+                            </>
+                        )}
+                    </div>
+
                 </div>
 
                 {/* زر البحث */}
@@ -153,10 +170,12 @@ export default function BookingSearch() {
                     <button
                         type="button"
                         onClick={handleSearch}
-                        className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[var(--primary)] px-8 py-3.5 font-bold text-white shadow-sm transition hover:bg-[var(--primary-deep)]"
+                        className="flex h-[46px] w-full items-center justify-center gap-2 rounded-2xl bg-[var(--primary)] px-8 font-bold text-white shadow-sm transition hover:bg-[var(--primary-deep)]"
                     >
                         <span>ابحث عن رحلات</span>
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
                     </button>
                 </div>
             </div>

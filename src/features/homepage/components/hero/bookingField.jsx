@@ -4,8 +4,8 @@ export default function BookingField({ label, value, options, onChange }) {
     const [open, setOpen] = useState(false);
 
     return (
-        // ضفنا z-30 هون عشان الحقل كله يطلع فوق قسم الإحصائيات
-        <div className="relative min-w-0 flex-1 z-30">
+        // تم رفع z-index إلى 40 لضمان ظهور القائمة فوق أي عنصر آخر
+        <div className="relative min-w-0 flex-1 z-40">
             <label className="mb-2 block text-xs font-bold text-[var(--muted)] text-right">
                 {label}
             </label>
@@ -30,8 +30,8 @@ export default function BookingField({ label, value, options, onChange }) {
             {open && (
                 <>
                     <div className="fixed inset-0 z-40" onClick={() => setOpen(false)}></div>
-                    {/* هون ضفنا z-50 عشان القائمة نفسها تكون فوق كل شي */}
-                    <div className="absolute top-full right-0 z-50 mt-2 max-h-60 w-full overflow-y-auto rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-2 shadow-xl">
+                    {/* القائمة نفسها بـ z-50 لتكون فوق كل شيء */}
+                    <div className="absolute top-full right-0 z-[100] mt-2 max-h-60 w-full overflow-y-auto overscroll-contain rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-2 shadow-xl">
                         {options.map((option) => (
                             <button
                                 key={option}

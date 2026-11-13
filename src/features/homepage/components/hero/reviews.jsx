@@ -7,8 +7,8 @@ export default function Reviews() {
     ];
 
     return (
-        <div className="mt-8 flex flex-wrap items-center gap-4">
-            <div className="flex -space-x-3" dir="ltr">
+        <div className="mt-8 flex flex-wrap items-center gap-6" dir="rtl">
+            <div className="flex items-center -space-x-3 space-x-reverse">
                 {users.map((user, index) => (
                     <div
                         key={index}
@@ -21,11 +21,11 @@ export default function Reviews() {
 
             <div>
                 <div className="flex items-center gap-2">
-                    <span className="text-lg tracking-wider text-[#C89539]">★★★★★</span>
                     <span className="text-sm font-bold text-[var(--text)]">4.9/5</span>
+                    <span className="text-lg tracking-wider text-[#C89539]">★★★★★</span>
                 </div>
-                <p className="text-xs text-[var(--muted)] mt-1">
-                    تجربة سفر يستاهل تجربها
+                <p className="text-xs text-[var(--muted)] mt-1 text-right">
+                    تجربة سفر بتستاهل تجريبها
                 </p>
             </div>
         </div>
