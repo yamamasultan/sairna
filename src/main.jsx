@@ -17,7 +17,7 @@ const queryClient = new QueryClient({
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     {/* 3. تغليف التطبيق بالـ Provider وتمرير الـ client */}
-    <QueryClientProvider client={queryClient}>git add .
+    <QueryClientProvider client={queryClient}>
       <App />
     </QueryClientProvider>
   </StrictMode>

@@ -88,15 +88,22 @@ export default function BookingSearch() {
                 {/* التاريخ */}
                 <div className="w-full lg:w-48 shrink-0">
                     <label className="mb-2 block text-xs font-bold text-[var(--muted)] text-right">تاريخ الرحلة</label>
-                    <div className="relative">
+                    <div className="relative flex h-[46px] items-center">
                         <input
                             type="date"
                             value={date}
                             onChange={(e) => setDate(e.target.value)}
-                            className="w-full cursor-pointer rounded-2xl border border-[var(--border)] bg-[var(--surface)] pl-4 pr-10 py-3 text-sm font-bold text-[var(--text)] outline-none transition hover:border-gray-300 focus:border-[var(--primary)] text-left"
+                            className="h-full w-full cursor-pointer rounded-2xl border border-[var(--border)] bg-[var(--surface)] pl-4 pr-10 text-sm font-bold text-[var(--text)] outline-none transition hover:border-gray-300 focus:border-[var(--primary)] text-left"
                             dir="ltr"
                         />
-                        <svg className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[var(--primary)] pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <svg 
+                            className="pointer-events-none absolute right-3.5 inset-y-0 my-auto h-5 w-5 text-[var(--primary)]" 
+                            fill="none" 
+                            stroke="currentColor" 
+                            viewBox="0 0 24 24"
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
                     </div>
                 </div>
 
