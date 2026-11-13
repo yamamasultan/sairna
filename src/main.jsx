@@ -1,13 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import App from './App.jsx';
-import './index.css';
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'; 
+import './index.css'
+import App from './App.jsx'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <BrowserRouter>
+// 2. إنشاء نسخة من QueryClient
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            refetchOnWindowFocus: false, // عشان ما يعيد جلب البيانات كل ما تضغط على نافذة المتصفح
+            retry: 1, // عدد المحاولات لو فشل الطلب
+        },
+    },
+});
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <QueryClientProvider client={queryClient}>
       <App />
-    </BrowserRouter>
-  </React.StrictMode>,
+    </QueryClientProvider>
+  </StrictMode>
+
 );
