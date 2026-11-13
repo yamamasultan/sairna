@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useCities, useTrips } from "../../hooks"; // استدعاء الهوكس
-import BookingField from "./BookingField";
+import BookingField from "./bookingField";
 
 export default function BookingSearch() {
     const [fromCity, setFromCity] = useState(null);
@@ -101,7 +101,7 @@ export default function BookingSearch() {
                 </div>
 
                 {/* المسافرين */}
-                <div className="relative w-full lg:w-40 shrink-0">
+                <div className="relative w-full lg:w-40 shrink-0 z-30">
                     <label className="mb-2 block text-xs font-bold text-[var(--muted)] text-right">المسافرين</label>
                     <button
                         type="button"
@@ -119,6 +119,7 @@ export default function BookingSearch() {
                     {isPassengerOpen && (
                         <>
                             <div className="fixed inset-0 z-40" onClick={() => setIsPassengerOpen(false)}></div>
+                            {/* ضفنا z-50 هون كمان */}
                             <div className="absolute top-full right-0 z-50 mt-2 w-full overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-xl">
                                 {[1, 2, 3, 4].map((num) => (
                                     <button
