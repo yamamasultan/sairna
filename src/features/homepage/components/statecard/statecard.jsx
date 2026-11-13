@@ -2,30 +2,27 @@ import { statsData } from './statecard-data';
 
 export default function StateCard() {
     return (
-        <section style={{ padding: '40px 20px', backgroundColor: '#fff', borderTop: '1px solid #eee', borderBottom: '1px solid #eee' }}>
-            <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center', textAlign: 'center', gap: '20px' }}>
-                
-                {statsData.map((stat, index) => (
-                    <div 
-                        key={stat.id} 
-                        style={{ 
-                        display: 'flex', 
-                        flexDirection: 'column', 
-                        alignItems: 'center', 
-                        flex: '1 1 200px',
-                        padding: '10px',
-                        borderRight: index !== statsData.length - 1 ? '1px solid #e5e7eb' : 'none'
-                        }}
-                    >
-                        <span style={{ fontSize: '32px', fontWeight: '800', color: '#111827', marginBottom: '8px' }}>
-                        {stat.number}
-                        </span>
-                        <span style={{ fontSize: '14px', fontWeight: '500', color: '#4b5563' }}>
-                        {stat.title}
-                        </span>
-                    </div>
-                ))}
+        <section className="border-y border-[var(--border)] bg-[var(--surface)] py-10">
+            <div className="container mx-auto px-4">
+                <div className="flex flex-wrap justify-around items-center text-center gap-5">
+                    
+                    {statsData.map((stat, index) => (
+                        <div 
+                            key={stat.id} 
+                            className={`flex flex-col items-center flex-1 min-w-[200px] p-2.5 ${
+                                index !== statsData.length - 1 ? 'md:border-l md:border-[var(--border)]' : ''
+                            }`}
+                        >
+                            <span className="text-3xl font-extrabold text-[var(--text)] mb-2">
+                                {stat.number}
+                            </span>
+                            <span className="text-sm font-medium text-[var(--muted)]">
+                                {stat.title}
+                            </span>
+                        </div>
+                    ))}
 
+                </div>
             </div>
         </section>
     );
