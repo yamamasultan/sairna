@@ -1,3 +1,4 @@
+
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'; // 1. استيراد المكتبة
@@ -13,11 +14,10 @@ const queryClient = new QueryClient({
         },
     },
 });
-
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     {/* 3. تغليف التطبيق بالـ Provider وتمرير الـ client */}
-    <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>git add .
       <App />
     </QueryClientProvider>
   </StrictMode>
