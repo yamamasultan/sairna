@@ -1,3 +1,62 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    color-scheme: light;
+    --bg: #f8fafb;
+    --surface: #fff;
+    --surface-alt: #f2f7f8;
+    --text: #112f41;
+    --muted: #718493;
+    --border: #e4ecef;
+    --primary: #0aa99b;
+    --primary-deep: #078e87;
+    --dark: #103a4e;
+    --dark-deep: #0a2c3e;
+    --soft-teal: #e6f8f3;
+    --radius: 22px;
+    --container: 1216px;
+    --font: Cairo, "Segoe UI", Tahoma, sans-serif;
+}
+
+.dark {
+    color-scheme: dark;
+    --bg: #0b1c29;
+    --surface: #112b3b;
+    --surface-alt: #173748;
+    --text: #eef8fa;
+    --muted: #9eb3be;
+    --border: #254252;
+    --dark: #0e2634;
+    --dark-deep: #091c27;
+    --soft-teal: #174b49;
+}
+
+.container {
+    width: 100%;
+    max-width: var(--container); 
+    margin-inline: auto;         
+    padding-inline: 16px;        
+}
+
+@media (min-width: 768px) {
+    .container {
+        padding-inline: 34px;
+    }
+}
+
+@media (max-width: 650px) {
+    .container {
+        width: 100% !important;
+        padding-inline: 12px !important;
+    }
+    .search-shell {
+        margin-top: 12px !important;
+        padding: 16px 12px !important;
+    }
+    .hero-visual {
+        margin-top: 12px !important;
+        margin-bottom: 0 !important;
+    }
+}
