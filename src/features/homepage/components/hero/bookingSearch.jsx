@@ -1,19 +1,6 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import BookingField from "./bookingField";
-
-const fetchCities = async () => {
-    const { data } = await axios.get("https://sairna.abdulrahman-hares.com/api/v1/website/cities");
-    return data;
-};
-
-const searchTrips = async ({ fromId, toId, date }) => {
-    const { data } = await axios.get("https://sairna.abdulrahman-hares.com/api/v1/website/trips", {
-        params: { from: fromId, to: toId, date: date }
-    });
-    return data;
-};
+import { useCities, useTrips } from "../../hooks"; // استدعاء الهوكس
+import BookingField from "./BookingField";
 
 export default function BookingSearch() {
     const [fromCity, setFromCity] = useState(null);
@@ -23,24 +10,19 @@ export default function BookingSearch() {
     const [isPassengerOpen, setIsPassengerOpen] = useState(false);
     const [searchParams, setSearchParams] = useState(null);
 
-    const { data: citiesData, isLoading } = useQuery({
-        queryKey: ['cities'],
-        queryFn: fetchCities,
-        onSuccess: (data) => {
-            if (data.length > 1 && !fromCity && !toCity) {
-                const aleppo = data.find(c => c.name.includes("حلب")) || data[1];
-                const damascus = data.find(c => c.name.includes("دمشق")) || data[0];
-                setFromCity(aleppo);
-                setToCity(damascus);
-            }
-        }
-    });
+    // 1. جلب المدن
+    const { data: citiesData, isLoading } = useCities();
 
-    useQuery({
-        queryKey: ['trips', searchParams],
-        queryFn: () => searchTrips(searchParams),
-        enabled: !!searchParams,
-    });
+    // تعيين المدن الافتراضية أول ما توصل
+    if (citiesData && citiesData.length > 1 && !fromCity && !toCity) {
+        const aleppo = citiesData.find(c => c.name.includes("حلب")) || citiesData[1];
+        const damascus = citiesData.find(c => c.name.includes("دمشق")) || citiesData[0];
+        setFromCity(aleppo);
+        setToCity(damascus);
+    }
+
+    // 2. البحث عن الرحلات
+    useTrips(searchParams); // بنستدعي الهوك بس عشان يشتغل بالخلفية
 
     const swapCities = () => {
         setFromCity(toCity);
@@ -49,13 +31,13 @@ export default function BookingSearch() {
 
     const handleSearch = () => {
         if (!fromCity || !toCity) return;
-        setSearchParams({ fromId: fromCity.id, toId: toCity.id, date: date });
+        setSearchParams({ originId: fromCity.id, destinationId: toCity.id, date: date });
     };
 
     const getCityName = (cityObj) => cityObj ? cityObj.name : "اختر مدينة";
     const cityNames = citiesData ? citiesData.map(c => c.name) : [];
 
-    if (isLoading) return <div className="p-6 text-center">جاري التحميل...</div>;
+    if (isLoading) return <div className="p-6 text-center text-[var(--text)]">جاري التحميل...</div>;
 
     return (
         <div className="w-full rounded-[32px] border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm relative z-10">
@@ -103,28 +85,18 @@ export default function BookingSearch() {
                     }}
                 />
 
-                                {/* التاريخ */}
+                {/* التاريخ */}
                 <div className="w-full lg:w-48 shrink-0">
                     <label className="mb-2 block text-xs font-bold text-[var(--muted)] text-right">تاريخ الرحلة</label>
                     <div className="relative">
-                        {/* حقل الإدخال */}
                         <input
                             type="date"
                             value={date}
                             onChange={(e) => setDate(e.target.value)}
                             className="w-full cursor-pointer rounded-2xl border border-[var(--border)] bg-[var(--surface)] pl-4 pr-10 py-3 text-sm font-bold text-[var(--text)] outline-none transition hover:border-gray-300 focus:border-[var(--primary)] text-left"
-                            dir="ltr" // عشان يظهر التاريخ (2026/11/13) بشكل صحيح
+                            dir="ltr"
                         />
-                        
-                        {/* أيقونة التقويم اللي على اليمين */}
-                        <svg 
-                            className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[var(--primary)] pointer-events-none" 
-                            fill="none" 
-                            stroke="currentColor" 
-                            viewBox="0 0 24 24"
-                        >
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                        </svg>
+                        <svg className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[var(--primary)] pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                     </div>
                 </div>
 
@@ -139,7 +111,6 @@ export default function BookingSearch() {
                         }`}
                     >
                         <span className="flex items-center gap-2 text-sm font-bold text-[var(--text)]">
-                            {/* أيقونة المسافرين أولاً */}
                             <svg className="w-5 h-5 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                             {passengers} مسافر
                         </span>
@@ -177,11 +148,9 @@ export default function BookingSearch() {
                         className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[var(--primary)] px-8 py-3.5 font-bold text-white shadow-sm transition hover:bg-[var(--primary-deep)]"
                     >
                         <span>ابحث عن رحلات</span>
-                        {/* أيقونة البحث */}
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                     </button>
                 </div>
-
             </div>
         </div>
     );
