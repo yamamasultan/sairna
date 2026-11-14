@@ -1,8 +1,7 @@
 import StateCard from './components/statecard/statecard';
 import Hero from './components/hero/hero';
-import StateCard from './components/statecard/statecard';
-import Discover from './components/Discover/discover';
-// import RouteMap from './components/routemap';
+import Discover from './components/Discover/discover'; 
+import Journey from './components/journey/JourneySection';
 import Steps from './components/steps/steps';
 
 export default function HomePage() {
@@ -13,7 +12,7 @@ export default function HomePage() {
         <StateCard />
         <Discover />
         <Steps />
-        {/* <RouteMap /> */}
+        <Journey />
         </div>
         );
 }
