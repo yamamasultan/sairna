@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import TopBar from "./topBar";
 import Logo from "./logo";
@@ -7,8 +8,8 @@ import UserActions from "./userActions";
 
 function Header() {
     const [isDarkMode, setIsDarkMode] = useState(false);
-    const [activeItem, setActiveItem] = useState("الرئيسية");
     const [mobileOpen, setMobileOpen] = useState(false);
+    const location = useLocation();
 
     useEffect(() => {
         document.documentElement.classList.toggle("dark", isDarkMode);
@@ -16,7 +17,13 @@ function Header() {
 
     const toggleDarkMode = () => setIsDarkMode((p) => !p);
 
-    const navItems = ["الرئيسية", "احجز رحلة", "شركات النقل", "حجوزاتي", "تتبّع الرحلة"];
+    const navItems = [
+        { name: "الرئيسية", path: "/" },
+        { name: "احجز رحلة", path: "/booking" },
+        { name: "شركات النقل", path: "/transport-companies" },
+        { name: "حجوزاتي", path: "/my-bookings" },
+        { name: "تتبّع الرحلة", path: "/tracking" },
+    ];
 
     return (
         <header
@@ -31,16 +38,16 @@ function Header() {
                     {/* اللوجو */}
                     <Logo />
 
-                    {/* القائمة الرئيسية للشاشات الكبيرة (تم رفع نقطة التوقف إلى xl لضمان عدم التداخل) */}
+                    {/* القائمة الرئيسية للشاشات الكبيرة */}
                     <div className="hidden xl:block">
-                        <NavBar activeItem={activeItem} setActiveItem={setActiveItem} />
+                        <NavBar />
                     </div>
 
                     {/* أزرار الإجراءات وزر القائمة للموبايل/التابلت */}
                     <div className="flex items-center gap-3">
                         <UserActions isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
 
-                        {/* زر قائمة الموبايل والتابلت (يظهر الآن حتى شاشات الـ xl لتجنب أي ازدحام) */}
+                        {/* زر قائمة الموبايل والتابلت */}
                         <button
                             type="button"
                             onClick={() => setMobileOpen((p) => !p)}
@@ -58,24 +65,21 @@ function Header() {
                 <div className="border-t border-[var(--border)] bg-[var(--surface)] px-4 py-4 xl:hidden shadow-lg transition-all">
                     <ul className="flex flex-col gap-1.5">
                         {navItems.map((item) => {
-                            const isActive = activeItem === item;
+                            const isActive = location.pathname === item.path;
                             return (
-                                <li key={item}>
-                                    <button
-                                        type="button"
-                                        onClick={() => {
-                                            setActiveItem(item);
-                                            setMobileOpen(false);
-                                        }}
+                                <li key={item.name}>
+                                    <Link
+                                        to={item.path}
+                                        onClick={() => setMobileOpen(false)}
                                         className={`flex w-full items-center justify-between rounded-[10px] px-3.5 py-3 text-xs font-extrabold transition-colors ${
                                             isActive
                                                 ? "bg-[var(--soft-teal)] text-[var(--primary)]"
                                                 : "text-[var(--muted)] hover:bg-[var(--surface-alt)] hover:text-[var(--text)]"
                                         }`}
                                     >
-                                        <span>{item}</span>
+                                        <span>{item.name}</span>
                                         <span className={`text-[var(--primary)] transition-transform ${isActive ? "opacity-100" : "opacity-0"}`}>‹</span>
-                                    </button>
+                                    </Link>
                                 </li>
                             );
                         })}
