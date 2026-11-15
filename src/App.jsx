@@ -12,9 +12,12 @@ import TripBooking from './features/tripBooking/tripBooking';
 import Login from './features/login/login';
 import Register from './features/register/register';
 import ProfilePage from './features/profile/profile';
+
 import AboutPage from './features/about/AboutPage';
+
 import Header from './components/header/header';
 import Footer from './components/footer/footer';
+
 
 function App() {
   const location = useLocation();
@@ -95,9 +98,9 @@ function App() {
 
         {/* الملف الشخصي */}
         <Route path="/profile" element={<ProfilePage />} />
-        
-        {/* صفحة عن سيرنا */}
+
         <Route path="/about" element={<AboutPage />} />
+
       </Routes>
 
       <Footer />
