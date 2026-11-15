@@ -34,7 +34,7 @@ export default function BookingSearch() {
     const getCityName = (cityObj) => cityObj ? cityObj.name : "اختر مدينة";
     const cityNames = citiesData ? citiesData.map(c => c.name) : [];
 
-    if (isLoading) return <div className="p-6 text-center text-[var(--text)]">جاري التحميل...</div>;
+    if (isLoading) return (<div className="p-6 text-center text-[var(--text)]">جاري التحميل...</div>);
 
     return (
         <div className="relative z-50 w-full rounded-[32px] border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm">

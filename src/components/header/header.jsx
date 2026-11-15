@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 import TopBar from "./topBar";
 import Logo from "./logo";
 import NavBar from "./navBar";
-import UserActions from "./userActions";
+import UserActions from "../../components/header/userActions";
 
 function Header() {
     const [isDarkMode, setIsDarkMode] = useState(false);
@@ -84,15 +84,18 @@ function Header() {
                             );
                         })}
                         <hr className="my-2 border-[var(--border)]" />
+                        {/* داخل جزء لوحة الموبايل والتابلت المنسدلة في ملف header.jsx */}
                         <li className="grid grid-cols-2 gap-2 pt-1">
-                            <a
-                                href="#login"
+                            <Link
+                                to="/login"
+                                onClick={() => setMobileOpen(false)}
                                 className="flex items-center justify-center rounded-[10px] border border-[var(--border)] px-3 py-2.5 text-xs font-extrabold text-[var(--text)] hover:bg-[var(--surface-alt)]"
                             >
                                 تسجيل الدخول
-                            </a>
+                            </Link>
                             <a
                                 href="#register"
+                                onClick={() => setMobileOpen(false)}
                                 className="flex items-center justify-center rounded-[10px] bg-[var(--dark)] px-3 py-2.5 text-xs font-extrabold text-white"
                             >
                                 إنشاء حساب
