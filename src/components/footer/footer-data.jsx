@@ -18,10 +18,10 @@ export const footerNavigation = {
         ],
     },
     support: {
-        title: "نحن هون لمساعدتك",
-        links: [
+    title: "نحن هون لمساعدتك",
+    links: [
         { name: "عن سيرنا", path: "/about" },
         { name: "مركز المساعدة", path: "/help-center" },
-        ],
-    },
+    ],
+},
 };
