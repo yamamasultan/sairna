@@ -16,6 +16,7 @@ import AboutPage from './features/about/AboutPage';
 import Header from './components/header/header';
 import Footer from './components/footer/footer';
 
+
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
