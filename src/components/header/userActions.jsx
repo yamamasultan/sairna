@@ -1,9 +1,10 @@
 import { Moon, Sun, ArrowLeft } from "lucide-react";
+import { Link } from "react-router-dom"; // استيراد Link
 
 function UserActions({ isDarkMode, toggleDarkMode }) {
     return (
         <div className="flex shrink-0 items-center gap-2 sm:gap-3" dir="rtl">
-            {/* زر الوضع الليلي: يظهر دائماً على كل الشاشات */}
+            {/* زر الوضع الليلي */}
             <button
                 type="button"
                 onClick={toggleDarkMode}
@@ -14,15 +15,15 @@ function UserActions({ isDarkMode, toggleDarkMode }) {
                 {isDarkMode ? <Sun size={19} /> : <Moon size={19} />}
             </button>
 
-            {/* رابط الدخول: مخفي على الموبايل والتابلت الصغير، ويظهر على الشاشات الكبيرة */}
-            <a
-                href="#login"
+            {/* رابط الدخول الموجه لصفحة تسجيل الدخول */}
+            <Link
+                to="/login"
                 className="hidden whitespace-nowrap text-xs font-extrabold text-[var(--text)] hover:text-[var(--primary)] xl:inline-block"
             >
                 دخول
-            </a>
+            </Link>
 
-            {/* زر إنشاء حساب: مخفي على الموبايل (حتى لا يزاحم زر القائمة)، ويظهر من التابلت فما فوق */}
+            {/* زر إنشاء حساب */}
             <a
                 href="#register"
                 className="hidden min-h-[40px] cursor-pointer items-center justify-center gap-2.5 whitespace-nowrap rounded-[12px] bg-[var(--dark)] px-4 py-2 text-xs font-extrabold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-[var(--primary-deep)] md:inline-flex"
