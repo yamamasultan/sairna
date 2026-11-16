@@ -1,4 +1,5 @@
 import { Mail, Lock, Eye, EyeOff, ArrowLeft, Sparkles, Loader2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function LoginForm({
   email,
@@ -143,9 +144,9 @@ export default function LoginForm({
       <div className="mt-7 text-center">
         <p className="text-sm text-[var(--muted)]">
           لسا ما عندك حساب؟{' '}
-          <a href="/register" className="font-bold text-[var(--primary)] hover:underline">
+          <Link to="/register" className="font-bold text-[var(--primary)] hover:underline">
             أنشئ حساب جديد
-          </a>
+          </Link>
         </p>
       </div>
     </div>

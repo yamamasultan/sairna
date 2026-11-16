@@ -5,7 +5,8 @@ import TransportCompanies from './features/companies/TransportCompanies';
 import BookingsPage from './features/bookings/BookingsPage';
 import TripTrackingPage from './features/trip-tracking/TripTrackingPage';
 import TripBooking from './features/tripBooking/tripBooking'; 
-import Login from './features/login/login'; // استيراد صفحة تسجيل الدخول الجديدة
+import Login from './features/login/login';
+import Register from './features/register/register';
 import Header from './components/header/header';
 import Footer from './components/footer/footer';
 
@@ -20,11 +21,15 @@ function App() {
         <Route path="/booking/:tripId" element={<TripBooking />} />
         <Route path="/transport-companies" element={<TransportCompanies />} />
         <Route path="/my-bookings" element={<BookingsPage />} />
+        
+        {/* مسارات تتبع الرحلة */}
         <Route path="/tracking" element={<TripTrackingPage />} />
         <Route path="/tracking/:tripId" element={<TripTrackingPage />} />
+        <Route path="/bookings/:tripId/track" element={<TripTrackingPage />} />
         
-        {/* مسار صفحة تسجيل الدخول */}
+        {/* مسارات المصادقة */}
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
       <Footer />
     </div>

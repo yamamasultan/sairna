@@ -10,14 +10,9 @@ export default function BookingsPage() {
     const navigate = useNavigate();
     const { bookings, isDemoMode, loading } = useBookings();
     const [selectedTicket, setSelectedTicket] = useState(null);
-    const [trackingNotice, setTrackingNotice] = useState(null);
 
+    // التوجيه المباشر لصفحة تتبع الرحلة عند النقر على الزر
     const handleTrackTrip = (booking) => {
-        if (booking.isDemo) {
-        setTrackingNotice('هذه رحلة توضيحية؛ ميزة التتبع المباشر تعمل مع الحجوزات الفعلية المؤكدة.');
-        setTimeout(() => setTrackingNotice(null), 4000);
-        return;
-        }
         navigate(`/bookings/${booking.id}/track`);
     };
 
@@ -50,14 +45,6 @@ export default function BookingsPage() {
                 <span>حجز جديد</span>
             </button>
             </div>
-
-            {/* تنبيه مؤقت عند النقر على تتبع رحلة توضيحية */}
-            {trackingNotice && (
-            <div className="mb-5 flex items-center gap-2.5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-xs font-semibold text-amber-800 sm:text-sm">
-                <Info className="h-4 w-4 shrink-0" />
-                <span>{trackingNotice}</span>
-            </div>
-            )}
 
             {/* حالة التحميل (Skeleton) */}
             {loading ? (

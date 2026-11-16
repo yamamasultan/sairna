@@ -1,10 +1,9 @@
 import { Moon, Sun, ArrowLeft } from "lucide-react";
-import { Link } from "react-router-dom"; // استيراد Link
+import { Link } from "react-router-dom";
 
 function UserActions({ isDarkMode, toggleDarkMode }) {
     return (
         <div className="flex shrink-0 items-center gap-2 sm:gap-3" dir="rtl">
-            {/* زر الوضع الليلي */}
             <button
                 type="button"
                 onClick={toggleDarkMode}
@@ -15,7 +14,6 @@ function UserActions({ isDarkMode, toggleDarkMode }) {
                 {isDarkMode ? <Sun size={19} /> : <Moon size={19} />}
             </button>
 
-            {/* رابط الدخول الموجه لصفحة تسجيل الدخول */}
             <Link
                 to="/login"
                 className="hidden whitespace-nowrap text-xs font-extrabold text-[var(--text)] hover:text-[var(--primary)] xl:inline-block"
@@ -23,14 +21,14 @@ function UserActions({ isDarkMode, toggleDarkMode }) {
                 دخول
             </Link>
 
-            {/* زر إنشاء حساب */}
-            <a
-                href="#register"
+            {/* زر إنشاء حساب الموجه للصفحة */}
+            <Link
+                to="/register"
                 className="hidden min-h-[40px] cursor-pointer items-center justify-center gap-2.5 whitespace-nowrap rounded-[12px] bg-[var(--dark)] px-4 py-2 text-xs font-extrabold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-[var(--primary-deep)] md:inline-flex"
             >
                 إنشاء حساب
                 <ArrowLeft size={16} />
-            </a>
+            </Link>
         </div>
     );
 }
