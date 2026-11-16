@@ -3,9 +3,9 @@ export const footerNavigation = {
         title: "استكشف",
         links: [
         { name: "الرئيسية", path: "/" },
-        { name: "احجز رحلتك", path: "/book-trip" },
+        { name: "احجز رحلتك", path: "/booking" }, // <-- تم تصحيح المسار ليتطابق مع App.jsx
         { name: "شركات النقل", path: "/transport-companies" },
-        { name: "تتبع رحلتك", path: "/track-trip" },
+        { name: "تتبع رحلتك", path: "/tracking" },
         ],
     },
     account: {

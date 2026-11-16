@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { CheckCircle2 } from 'lucide-react';
@@ -13,9 +12,10 @@ import Login from './features/login/login';
 import Register from './features/register/register';
 import ProfilePage from './features/profile/profile';
 import AboutPage from './features/about/AboutPage';
+import HelpCenterPage from './features/help-center/HelpCenterPage'; // <-- 1. استيراد صفحة مركز المساعدة
+
 import Header from './components/header/header';
 import Footer from './components/footer/footer';
-
 
 function App() {
   const location = useLocation();
@@ -28,7 +28,6 @@ function App() {
     const message = location.state?.toastMessage;
 
     if (message) {
-
       // حذف الإشعار من حالة التنقل لمنع تكراره
       navigate(location.pathname, {
         replace: true,
@@ -99,6 +98,9 @@ function App() {
         
         {/* صفحة عن سيرنا */}
         <Route path="/about" element={<AboutPage />} />
+
+        {/* صفحة مركز المساعدة */}
+        <Route path="/help-center" element={<HelpCenterPage />} /> {/* <-- 2. إضافة المسار هنا */}
       </Routes>
 
       <Footer />
